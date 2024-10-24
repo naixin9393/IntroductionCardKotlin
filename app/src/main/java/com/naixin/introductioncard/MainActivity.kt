@@ -28,10 +28,18 @@ class MainActivity : ComponentActivity() {
             IntroductionCardTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    GreetingPreview();
+                    ContactPage();
                 }
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ContactPage() {
+    IntroductionCardTheme {
+        ContactCard("naixin9393", "naixin.chen101@alu.ulpgc.es")
     }
 }
 
@@ -40,44 +48,45 @@ fun ContactCard(githubUsername: String, email: String, modifier: Modifier = Modi
     Column(
         verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement= Arrangement.spacedBy(2.dp),
-            modifier = Modifier
-                .height(30.dp)
-                .padding(3.dp)
-        ) {
-            Image(
-                painter = painterResource(R.drawable.poste),
-                contentDescription = null
-            )
-            Text(
-                text = "$email"
-            )
-        }
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement= Arrangement.spacedBy(2.dp),
-            modifier = Modifier
-                .height(30.dp)
-                .padding(3.dp)
-        ) {
-            Image(
-                painter = painterResource(R.drawable.github_light),
-                contentDescription = null,
-            )
-            Text(
-                text = "https://github.com/$githubUsername"
-            )
-        }
+        Email(email = email)
+        Github(githubUsername = githubUsername)
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    IntroductionCardTheme {
-        ContactCard("naixin9393", "naixin.chen101@alu.ulpgc.es")
+fun Github(githubUsername: String) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement= Arrangement.spacedBy(2.dp),
+        modifier = Modifier
+            .height(30.dp)
+            .padding(3.dp)
+    ) {
+        Image(
+            painter = painterResource(R.drawable.github_light),
+            contentDescription = null,
+        )
+        Text(
+            text = "https://github.com/$githubUsername"
+        )
+    }
+}
+
+@Composable
+fun Email(email: String) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement= Arrangement.spacedBy(2.dp),
+        modifier = Modifier
+            .height(30.dp)
+            .padding(3.dp)
+    ) {
+        Image(
+            painter = painterResource(R.drawable.poste),
+            contentDescription = null
+        )
+        Text(
+            text = "$email"
+        )
     }
 }
